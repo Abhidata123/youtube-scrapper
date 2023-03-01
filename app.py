@@ -10,12 +10,12 @@ logging.basicConfig(filename=os.path.join(BASE_DIR, "scraper_logs.log") , level=
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods = ["GET"])
 @cross_origin()
 def index():
 	return render_template('index.html')
 
-@app.route("/details", methods=["POST"])
+@app.route("/details", methods=["GET","POST"])
 @cross_origin()
 def details():
 	if request.method == "POST":
@@ -88,4 +88,5 @@ def details():
 			print(e)
 
 if __name__ == "__main__":
-	app.run(debug = True)
+	app.run(host='127.0.0.1', port=8000, debug=True)
+ 	#app.run(debug = True)
