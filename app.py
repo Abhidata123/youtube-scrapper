@@ -4,13 +4,14 @@ import logging
 import os
 import requests
 import re
+import pandas as pd
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 logging.basicConfig(filename=os.path.join(BASE_DIR, "scraper_logs.log") , level=logging.INFO)
 
-app = Flask(__name__)
+app = Flask(__name__)	
 
-@app.route("/", methods = ["GET"])
+@app.route("/", methods=["GET"])
 @cross_origin()
 def index():
 	return render_template('index.html')
@@ -81,6 +82,10 @@ def details():
 				}
 				details_list.append(details_dict)
 
+			#storing data into a csv file
+			df = pd.DataFrame(details_list)
+			df.to_csv('YTscrapData.csv', index=False)
+
 			return render_template('details.html', details=details_list, channel=input_text)
 		
 
@@ -89,4 +94,4 @@ def details():
 
 if __name__ == "__main__":
 	app.run(host='127.0.0.1', port=8000, debug=True)
- 	#app.run(debug = True)
+	#app.run(debug = True)
