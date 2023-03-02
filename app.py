@@ -38,7 +38,7 @@ def details():
 
 			#thumbnails
 			logging.info("Finding thumbnails...")
-			vid_thumbnails = re.findall(r"https://i.ytimg.com/vi/[A-Za-z0-9_]{11}/[A-Za-z0-9_]{9}.jpg", response_text)
+			vid_thumbnails = re.findall(r"https://i.ytimg.com/vi/[A-Za-z0-9_-]{11}/[A-Za-z0-9_]{9}.jpg", response_text)
 
 			#links
 			logging.info("Finding links...")
